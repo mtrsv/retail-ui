@@ -29,6 +29,8 @@ export interface KebabProps extends CommonProps {
    * @default () => undefined
    */
   onOpen: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
   size: 'small' | 'medium' | 'large';
   /**
    * Список позиций доступных для расположения выпадашки
@@ -54,6 +56,8 @@ export class Kebab extends React.Component<KebabProps, KebabState> {
 
   public static propTypes = {};
 
+  private span: Nullable<HTMLSpanElement>;
+
   public static defaultProps = {
     onOpen: () => undefined,
     onClose: () => undefined,
@@ -67,6 +71,21 @@ export class Kebab extends React.Component<KebabProps, KebabState> {
     focusedByTab: false,
     anchor: null,
   };
+
+  /**
+   * @public
+   */
+  public focus() {
+    tabListener.isTabPressed = true;
+    this.span?.focus();
+  }
+
+  /**
+   * @public
+   */
+  public blur() {
+    this.span?.blur();
+  }
 
   private theme!: Theme;
 
@@ -152,6 +171,7 @@ export class Kebab extends React.Component<KebabProps, KebabState> {
           [jsStyles.disabled()]: disabled,
           [jsStyles.focused(this.theme)]: this.state.focusedByTab,
         })}
+        ref={this.spanRef}
       >
         {this.renderIcon()}
       </span>
@@ -182,6 +202,7 @@ export class Kebab extends React.Component<KebabProps, KebabState> {
         if (this.state.opened) {
           this.props.onOpen();
         } else {
+          this.props.onBlur?.();
           this.props.onClose();
         }
       },
@@ -197,6 +218,7 @@ export class Kebab extends React.Component<KebabProps, KebabState> {
           this.setState({ focusedByTab: true });
         }
       });
+        this.props.onFocus?.();
     }
   };
 
@@ -204,6 +226,13 @@ export class Kebab extends React.Component<KebabProps, KebabState> {
     this.setState({
       focusedByTab: false,
     });
+    if (!this.state.opened) {
+      this.props.onBlur?.();
+    }
+  };
+
+  private spanRef = (ref: HTMLSpanElement | null) => {
+    this.span = ref;
   };
 
   private renderIcon() {
