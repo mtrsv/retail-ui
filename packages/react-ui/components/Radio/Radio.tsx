@@ -129,6 +129,7 @@ export class Radio<T> extends React.Component<RadioProps<T>, RadioState> {
         [styles.disabled(this.theme)]: disabled,
         [styles.checkedDisabled(this.theme)]: this.props.checked && disabled,
         [globalClasses.radio]: true,
+        [globalClasses.checkedRadio]: this.props.checked,
       }),
     };
 
@@ -164,6 +165,7 @@ export class Radio<T> extends React.Component<RadioProps<T>, RadioState> {
       inputProps.suppressHydrationWarning = true;
       radioProps.className = cx(radioProps.className, {
         [styles.checked(this.theme)]: checked,
+        [globalClasses.checkedRadio]: checked,
         [styles.checkedDisabled(this.theme)]: checked && disabled,
       });
     }

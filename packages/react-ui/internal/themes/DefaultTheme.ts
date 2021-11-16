@@ -1265,6 +1265,9 @@ export class DefaultTheme {
   public static radioBgImage = 'linear-gradient(-180deg, #fff 0, #ebebeb 100%)';
   public static radioBgColor = 'transparent';
   public static radioHoverBg = 'linear-gradient(-180deg, #f2f2f2 0, #dfdfdf 100%)';
+  public static get radioCheckedHoverBg() {
+    return this.radioHoverBg;
+  }
   public static radioActiveBg = 'linear-gradient(-180deg, #e1e1e1 0, #e1e1e1 100%)';
   public static radioBorderWidth = '1px';
   public static radioBorderColor = 'rgba(0, 0, 0, 0.15)';

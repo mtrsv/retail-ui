@@ -3,6 +3,7 @@ import { Theme } from '../../lib/theming/Theme';
 
 export const globalClasses = prefix('radio')({
   radio: 'radio',
+  checkedRadio: 'checked-radio',
 });
 
 const mixins = {
@@ -35,6 +36,9 @@ export const styles = memoizeStyle({
       &:hover .${globalClasses.radio} {
         background: ${t.radioHoverBg};
         box-shadow: ${t.radioHoverShadow};
+      }
+      &:hover .${globalClasses.checkedRadio} {
+        background: ${t.radioCheckedHoverBg};
       }
       &:active .${globalClasses.radio} {
         background: ${t.radioActiveBg};

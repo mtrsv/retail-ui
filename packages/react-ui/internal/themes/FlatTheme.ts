@@ -201,6 +201,9 @@ export class FlatTheme extends (class {} as typeof DefaultThemeInternal) {
   public static get radioHoverBg() {
     return this.checkboxHoverBg;
   }
+  public static get radioCheckedHoverBg() {
+    return this.checkboxCheckedHoverBg;
+  }
   public static get radioActiveBg() {
     return this.checkboxActiveBg;
   }
